@@ -1,14 +1,18 @@
-import { Line } from 'vue-chartjs'
+import { Line, mixins } from 'vue-chartjs'
 import {
     mapGetters,
     mapMutations
 } from "vuex";
+const { reactiveData } = mixins
 
 export default {
+    mixins: [reactiveData],
+    props: ['options'],
     computed: {
         ...mapGetters(['chartsGetter'])
       },
     extends: Line,
+    
     mounted () {
 
     this.renderChart({

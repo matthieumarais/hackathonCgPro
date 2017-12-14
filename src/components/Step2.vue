@@ -75,11 +75,9 @@
   </el-input>
 </div>
           <el-button v-on:click="addAsset()" type="info"><i class="el-icon-circle-plus-outline"></i></el-button>
-          <el-button v-on:click="deleteAsset()" type="info"><i class="el-icon-circle-minus-outline"></i></el-button>
-          
         <div>
           {{dates[0] | formatDate}} - {{dates[1] | formatDate}}
-          <div v-for="(item, index) in assets">{{item.name}}: {{item.amount}}€</div>
+          <div v-for="(item, index) in assets">{{item.name}}: {{item.amount}}€<button v-on:click="deleteAsset(item.idAsset)"><i class="el-icon-error"></i></button></div>
         </div>
       </el-col>
     </el-row>
@@ -88,135 +86,142 @@
 </template>
 
 <script>
-  import axios from "axios";
-  import LineExample from "./LineChart.js";
-  import {
-    mapGetters,
-    mapMutations
-  } from "vuex";
-  
-  export default {
-    computed: {
-      ...mapGetters(["datesGetter", "assetsGetter"])
+import axios from "axios";
+import LineExample from "./LineChart.js";
+import { mapGetters, mapMutations } from "vuex";
+
+export default {
+  computed: {
+    ...mapGetters(["datesGetter", "assetsGetter"])
+  },
+  name: "Step2",
+  components: {
+    LineExample
+  },
+  data() {
+    return {
+      dates: [],
+      chosenIndex: "",
+      simulation: [],
+      errors: [],
+      choosenAssets: [],
+      activeName: "2",
+      models: [],
+      assets: [],
+      amount: ""
+    };
+  },
+
+  methods: {
+    addChartsData() {
+      this.$store.commit("storeChartsData", [
+        
+        this.simulation[this.simulation.length - 1].totalAccumulatedAmount,
+        this.simulation[this.simulation.length - 1].totalIncomeAmount
+      ]);
     },
-    name: "Step2",
-    components: {
-      LineExample
-    },
-    data() {
-      return {
-        dates: [],
-        chosenIndex: "",
-        simulation: [],
-        errors: [],
-        choosenAssets: [],
-        activeName: "2",
-        models: [],
-        assets: [],
-        amount: ""
-      };
-    },
-  
-    methods: {
-      addChartsData() {
-        this.$store.commit("storeChartsData", [
-          this.simulation[this.simulation.length - 1].totalAccumulatedAmount,
-          this.simulation[this.simulation.length - 1].totalIncomeAmount
-        ]);
-      },
-      async addAsset() {
- try {
-          const response = await axios.post(
-            `https://ulnjbgo4dl.execute-api.eu-central-1.amazonaws.com/dev/hackaton/user/asset`, {idAssetModel: this.models[this.chosenIndex].idAssetModel, idUser: 1, name: this.models[this.chosenIndex].name, amount: this.amount, start : null, end : null, rate: 0.05}
-          );
-         /*  this.addChartsData(); */
-        } catch (e) {
-          this.errors.push(e);
-        }
-       /*  this.$store.commit("storeAssets", this.assets[this.chosenIndex]);
+    async addAsset() {
+      try {
+        const response = await axios.post(
+          `https://ulnjbgo4dl.execute-api.eu-central-1.amazonaws.com/dev/hackaton/user/asset`,
+          {
+            idAssetModel: this.models[this.chosenIndex].idAssetModel,
+            idUser: 1,
+            name: this.models[this.chosenIndex].name,
+            amount: this.amount,
+            start: null,
+            end: null,
+            rate: 0.05
+          }
+        );
+        this.getAssets();
+        this.$store.commit("storeDates", this.dates);
+      } catch (e) {
+        this.errors.push(e);
+      }
+      /*  this.$store.commit("storeAssets", this.assets[this.chosenIndex]);
         this.$store.commit("storeDates", this.dates); */
-      },
-      async getSimu() {
-        try {
-          const response = await axios.get(
-            `https://ulnjbgo4dl.execute-api.eu-central-1.amazonaws.com/dev/hackaton/user/1/simulation?start=2017&end=2045`
-          );
-          this.simulation = response.data;
-          console.log("simulation", this.simulation);
-          this.addChartsData();
-        } catch (e) {
-          this.errors.push(e);
-        }
-      },
-      async getModels() {
-        try {
-          const response = await axios.get(
-            `https://ulnjbgo4dl.execute-api.eu-central-1.amazonaws.com/dev/hackaton/user/asset/model`
-          );
-          this.models = response.data;
-          console.log("models", this.models);
-          this.addChartsData();
-        } catch (e) {
-          this.errors.push(e);
-        }
-      },
-      async getAssets() {
-        try {
-          const response = await axios.get(
-            `https://ulnjbgo4dl.execute-api.eu-central-1.amazonaws.com/dev/hackaton/user/1/asset`
-          );
-          this.assets = response.data;
-          console.log("assets", this.assets);
-          this.addChartsData();
-        } catch (e) {
-          this.errors.push(e);
-        }
-      },
-      async deleteAsset() {
-        try {
-          const response = await axios.delete(
-            `https://ulnjbgo4dl.execute-api.eu-central-1.amazonaws.com/dev/hackaton/user/asset/52`
-          );
-          console.log("deleted");
-        } catch (e) {
-          this.errors.push(e);
-        }
+    },
+    async getSimu() {
+      try {
+        const response = await axios.get(
+          `https://ulnjbgo4dl.execute-api.eu-central-1.amazonaws.com/dev/hackaton/user/1/simulation?start=` + store.dates[0] + `&end=`
+        );
+        this.simulation = response.data;
+        console.log("simulation", this.simulation);
+        this.addChartsData();
+      } catch (e) {
+        this.errors.push(e);
       }
     },
-  
-  
-    // Fetches posts when the component is created.
-    created() {
-      this.getSimu();
-      this.getModels();
-      this.getAssets()
+    async getModels() {
+      try {
+        const response = await axios.get(
+          `https://ulnjbgo4dl.execute-api.eu-central-1.amazonaws.com/dev/hackaton/user/asset/model`
+        );
+        this.models = response.data;
+        console.log("models", this.models);
+      } catch (e) {
+        this.errors.push(e);
+      }
+    },
+    async getAssets() {
+      try {
+        const response = await axios.get(
+          `https://ulnjbgo4dl.execute-api.eu-central-1.amazonaws.com/dev/hackaton/user/1/asset`
+        );
+        this.assets = response.data;
+        console.log("assets", this.assets);
+      } catch (e) {
+        this.errors.push(e);
+      }
+    },
+    async deleteAsset(id) {
+      try {
+        const response = await axios.delete(
+          `https://ulnjbgo4dl.execute-api.eu-central-1.amazonaws.com/dev/hackaton/user/asset/` +
+            id
+        );
+        console.log("deleted");
+        this.getAssets();
+      } catch (e) {
+        this.errors.push(e);
+      }
     }
-  };
+  },
+
+  // Fetches posts when the component is created.
+  created() {
+    this.getSimu();
+    this.getModels();
+    this.getAssets();
+  }
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .el-row {
-    margin-bottom: 20px;
-    &:last-child {
-      margin-bottom: 0;
-    }
+.el-row {
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
   }
-  
-  .custom-input {
-    height: 100px;
-  }
-  
-  .grid-content {
-    min-height: 36px;
-  }
-  
-  .left-content {
-    border-right: solid 1.5px lightgrey;
-    text-align: center;
-  }
-  
-  .right-content {
-    padding: 10px;
-  }
+}
+
+.custom-input {
+  height: 100px;
+}
+
+.grid-content {
+  min-height: 36px;
+}
+
+.left-content {
+  border-right: solid 1.5px lightgrey;
+  text-align: center;
+}
+
+.right-content {
+  padding: 10px;
+}
 </style>
