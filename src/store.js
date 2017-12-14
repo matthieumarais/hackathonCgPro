@@ -10,6 +10,7 @@ var state = {
     storeAssets: [],
     storeErrors: [],
     storeChoosenAssets: [],
+    storeChartsData : []
 },
 
  mutations = {
@@ -20,14 +21,18 @@ var state = {
         state.storeDates[0] = payload;
         state.storeDates[0][0] = moment(state.storeDates[0][0]).format("YYYY");
         state.storeDates[0][1] = moment(state.storeDates[0][1]).format("YYYY");
-    } 
+    },
+    storeChartsData: (state, payload) => {
+        state.storeChartsData[0] = payload;
+    }
             
 }
     
 
 const getters = {
     datesGetter: state => state.storeDates,
-    assetsGetter: state => state.storeChoosenAssets
+    assetsGetter: state => state.storeChoosenAssets,
+    chartsGetter: state => state.storeChartsData
 }
 
 const actions = {

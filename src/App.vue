@@ -59,12 +59,6 @@
   .el-header {
     background-color: #36abd7;
   }
-  
-  .steps {
-    position: fixed;
-    bottom: 100px;
-    width: 100%;
-  }
 
   .disable{
     pointer-events: none;
