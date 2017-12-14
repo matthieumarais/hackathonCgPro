@@ -1,22 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import Api from '@/components/Api'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-import axios from 'axios';
-
+import Step1 from '@/components/Step1'
+import Step2 from '@/components/Step2'
 
 Vue.use(Router)
 
 export default new Router({
-    routes: [{
-            path: '/',
-            component: HelloWorld
-        },
-        {
-            path: '/api',
-            component: Api
-        }
-    ]
+  routes: [
+    {
+      path: '/',
+      name: 'Step1',
+      component: Step1
+    },
+    {
+      path: '/step2',
+      name: 'Step2',
+      component: Step2
+    }
+  ]
 })
