@@ -3,8 +3,16 @@
     <el-row>
       <el-col :span="14">
         <div class="grid-content left-content">
-          <el-date-picker v-model="dates" type="daterange" range-separator="To" start-placeholder="Start date" end-placeholder="End date">
-          </el-date-picker>
+           <el-date-picker
+    v-model="dates[0]"
+    type="year"
+    placeholder="Pick a year">
+  </el-date-picker>
+   <el-date-picker
+    v-model="dates[1]"
+    type="year"
+    placeholder="Pick a year">
+  </el-date-picker>
           <br>
           <el-select v-model="chosenIndex" placeholder="Choisissez un placement">
             <el-option v-for="(item, index) in assets" :key="item.id" :label="item.name" :value="index">

@@ -4,7 +4,13 @@
 
 <script>
   import axios from "axios";
+    import {
+    mapGetters, mapMutations
+  } from "vuex";
   export default {
+          computed: {
+      ...mapGetters(['datesGetter','assetsGetter'])
+    },
     name: "Step2",
     data() {
       return {
