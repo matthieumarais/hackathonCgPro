@@ -18,7 +18,7 @@
       <el-col :span="10">
         <div class="grid-content right-content">
           {{dates[0] | formatDate}} - {{dates[1] | formatDate}}
-          <div v-for="(item, index) in choosenAssets">{{item.name}}: {{item.amount}}€</div>
+          <div v-for="(item, index) in assetsGetter">{{item.name}}: {{item.amount}}€</div>
         </div>
       </el-col>
     </el-row>
@@ -27,12 +27,15 @@
 
 <script>
   import axios from "axios";
-  import {mapGetters} from "vuex";
-
+  
+  import {
+    mapGetters, mapMutations
+  } from "vuex";
+  
   export default {
-      computed: {
-        ... mapGetters(['datesGetter'])
-      },
+    computed: {
+      ...mapGetters(['datesGetter','assetsGetter'])
+    },
     name: "Step1",
     data() {
       return {
@@ -40,18 +43,16 @@
         chosenIndex: '',
         assets: [],
         errors: [],
-        choosenAssets: [],
       }
     },
     methods: {
-      addAsset: function() {
-        this.choosenAssets.push(this.assets[this.chosenIndex])
-        console.log(this.choosenAssets)
-        console.log(this.datesGetter)
+      addAsset () {
+        this.$store.commit('storeAssets', this.assets[this.chosenIndex])
+        this.$store.commit('storeDates', this.dates)
       },
-    
     },
     
+  
   
     // Fetches posts when the component is created.
     async created() {
