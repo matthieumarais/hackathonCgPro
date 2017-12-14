@@ -20,7 +20,14 @@
 </template>
 
 <script>
+  import {
+    mapGetters, mapMutations
+  } from "vuex";
+  
   export default {
+        computed: {
+      ...mapGetters(['datesGetter'])
+    },
     name: 'app',
     data() {
       return {
@@ -38,7 +45,8 @@
         this.i++
         this.page = "/step" + this.i
         return this.page
-      }
+        this.$store.commit('storeAssets', this.choosenAssets)
+      },
     }
   }
 </script>
