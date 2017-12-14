@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import moment from 'moment'
 
 Vue.use(Vuex)
 
@@ -17,6 +18,8 @@ var state = {
         },
         storeDates: (state, payload) => {
             state.storeDates[0] = payload;
+            state.storeDates[0][0] = moment(state.storeDates[0][0]).format("YYYY");
+            state.storeDates[0][1] = moment(state.storeDates[0][1]).format("YYYY");
         }
 
     }
