@@ -10,6 +10,17 @@ import axios from 'axios'
 import moment from 'moment'
 import Vuex from 'vuex'
 import store from './store'
+import VueCurrencyFilter from 'vue-currency-filter'
+
+Vue.use(VueCurrencyFilter, 
+  {
+    symbol : '', 
+    thousandsSeparator: '.',
+    fractionCount: 2,
+    fractionSeparator: ',',
+    symbolPosition: 'front',
+    symbolSpacing: true
+  })
 
 Vue.use(ElementUI, { locale })
 Vue.use(Vuex)
