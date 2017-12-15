@@ -1,14 +1,15 @@
 <template>
   <div id="app">
     <el-header><img src="./assets/logo.png" alt="cgpro.tv"></el-header>
-    <el-main>
-      <el-row>
+    <el-main style="padding:0">
+      <el-row class="toto">
         <router-view/>
       </el-row>
     </el-main>
     <el-footer class="grid-content steps">
-      <router-link v-bind:to="page"><el-button v-bind:class="{disable:isDisable }" style="margin-bottom: 20px;" @click="next">Next step</el-button></router-link>
-      <el-steps :active="active" finish-status="success">
+      <router-link v-if='i<3' v-bind:to="page"><button class="btn1 btn" v-bind:class="{disable:isDisable }" @click="next">Démarrer votre simulation</button></router-link>
+      <router-link v-if='i>=3' v-bind:to="page"><button class="btn2 btn" v-bind:class="{disable:isDisable }" style="margin-bottom: 20px;" @click="next">Next step</button></router-link>
+      <el-steps style="margin-top: 50px" :active="active" finish-status="success">
       <el-step title="Bienvenue" description="Some description"></el-step>
       <el-step  title="Simulation" description="Some description"></el-step>
       <el-step  title="Résultat" description="Some description"></el-step>
@@ -62,5 +63,22 @@
   .disable{
     pointer-events: none;
     opacity: 0.7;
+  }
+  .toto{
+        padding-bottom: 50px;
+  }
+  .btn1{
+    cursor: pointer;
+    top: 39%;
+    left: 694px;
+    position: absolute;
+    background-color:#00A5DA;
+     color:#fff; font-size:20px;
+      padding:20px 10px
+  }
+  .btn1:hover{
+    color:#fff;
+    background-color: transparent;
+    border:solid 1px #36abd7;
   }
 </style>

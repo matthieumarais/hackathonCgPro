@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import step1 from '@/components/step1'
-import step2 from '@/components/step2'
+import step1 from '@/components/Step1'
+import step2 from '@/components/Step2'
 import end from '@/components/end'
 
 
@@ -19,9 +19,9 @@ export default new Router({
             component: step2
         },
         {
-          path: '/step3',
-          name: 'end',
-          component: end
-      },
+            path: '/step3',
+            name: 'end',
+            component: end
+        },
     ]
 })

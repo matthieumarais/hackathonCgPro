@@ -33,7 +33,7 @@
     };
 </script>
 
-<style>
+<style scoped>
     .rel {
         position: relative;
         height:70vh;
