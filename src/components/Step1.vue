@@ -68,16 +68,19 @@
             </el-option>
           </el-select>
         </div>
-        <div style="margin-top: 15px;">
+        <div style="margin-top: 15px; width:50%">
           <el-input placeholder="Montant" v-model="amount">
             <template slot="append">€
 </template>
   </el-input>
-</div>
           <el-button v-on:click="addAsset()" type="info"><i class="el-icon-circle-plus-outline"></i></el-button>
+  
+</div>
         <div>
+         <div class="padding">
           {{dates[0] | formatDate}} - {{dates[1] | formatDate}}
-          <div v-for="(item, index) in assets">{{item.name}}: {{item.amount}}€<button v-on:click="deleteAsset(item.idAsset)"><i class="el-icon-error"></i></button></div>
+          </div>
+          <div class="padding" v-for="(item, index) in assets">{{item.name}}: {{item.amount}}€<button class="margin" v-on:click="deleteAsset(item.idAsset)"><i class="el-icon-error"></i></button></div>
         </div>
       </el-col>
     </el-row>
@@ -108,7 +111,8 @@ export default {
       activeName: "2",
       models: [],
       assets: [],
-      amount: ""
+      amount: "",
+     // label:[]
     };
   },
 
@@ -145,7 +149,7 @@ export default {
     async getSimu() {
       try {
         const response = await axios.get(
-         `https://ulnjbgo4dl.execute-api.eu-central-1.amazonaws.com/dev/hackaton/user/1/simulation?start=2017&end=2020`
+         `https://ulnjbgo4dl.execute-api.eu-central-1.amazonaws.com/dev/hackaton/user/1/simulation?start=${this.dates[0]}&end=${this.dates[1]}`
         );
         this.simulation = response.data;
         console.log("simulation", this.simulation);
@@ -207,11 +211,15 @@ export default {
     margin-bottom: 0;
   }
 }
-
+.padding{
+  padding-bottom:20px;
+}
 .custom-input {
   height: 100px;
 }
-
+.margin{
+  margin-left:20px;
+}
 .grid-content {
   min-height: 36px;
 }
