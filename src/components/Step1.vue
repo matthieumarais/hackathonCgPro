@@ -93,6 +93,7 @@ import axios from "axios";
 import LineExample from "./LineChart.js";
 import { mapGetters, mapMutations } from "vuex";
 
+
 export default {
   computed: {
     ...mapGetters(["datesGetter", "assetsGetter"])
@@ -138,13 +139,13 @@ export default {
             rate: 0.05
           }
         );
-        this.getAssets();
+        this.getSimu(); // lance la simu
+        this.getAssets();  // affiche la liste
         this.$store.commit("storeDates", this.dates);
+        
       } catch (e) {
         this.errors.push(e);
       }
-      /*  this.$store.commit("storeAssets", this.assets[this.chosenIndex]);
-        this.$store.commit("storeDates", this.dates); */
     },
     async getSimu() {
       try {
@@ -187,7 +188,8 @@ export default {
             id
         );
         console.log("deleted");
-        this.getAssets();
+        this.getSimu(); // lance la simu
+        this.getAssets();  // affiche la liste
       } catch (e) {
         this.errors.push(e);
       }

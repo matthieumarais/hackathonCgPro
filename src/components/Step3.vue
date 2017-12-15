@@ -13,7 +13,7 @@
                     <button class="btn" aria-label="Left Align">imprimer</button>
                 </div>
             </div>
-           <router-link :to="{ path: '/' }"> <button class="btn simu">Refaire une simulation</button></router-link>
+           <a href="http://localhost:8080/"><button class="btn simu">Refaire une simulation</button></a>
         </div>
     </div>
 </template>
@@ -61,6 +61,7 @@
     }
     
     h1 {
-        padding-bottom: 200px;
+        margin-top : 40px;
+       margin-bottom: 60px;
     }
 </style>
