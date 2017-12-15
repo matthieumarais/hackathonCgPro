@@ -6,16 +6,48 @@
         <router-view/>
       </el-row>
     </el-main>
+
     <el-footer class="grid-content steps">
       <router-link v-if='i<3' v-bind:to="page"><button class="btn1 btn" v-bind:class="{disable:isDisable }" @click="next">Démarrer votre simulation</button></router-link>
-      <router-link v-if='i>=3' v-bind:to="page"><button class="btn2 btn" v-bind:class="{disable:isDisable }" style="margin-bottom: 20px;" @click="next">Next step</button></router-link>
+      <router-link v-if='i==3' v-bind:to="page"><button class="btn2 btn" v-bind:class="{disable:isDisable }" @click="next">Suivant</button></router-link>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  <i class="el-icon-service"></i>
+</button>
       <el-steps style="margin-top: 50px" :active="active" finish-status="success">
-      <el-step title="Bienvenue" description="Some description"></el-step>
-      <el-step  title="Simulation" description="Some description"></el-step>
-      <el-step  title="Résultat" description="Some description"></el-step>
+      <el-step title="Bienvenue"></el-step>
+      <el-step  title="Simulation"></el-step>
+      <el-step  title="Résultat"></el-step>
       </el-steps>
+      <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Contacter un Coach en direct</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    
+      <div class="modal-body">
+        <p><strong>Thomas Godinho</strong> : Bonjour, je suis Thomas votre coach financier. Vous avez une question ?<p>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+        <div class="input-group">
+  <input type="text" class="form-control" placeholder="Votre message..." aria-label="Message" aria-describedby="basic-addon2">
+  <span class="input-group-addon" id="basic-addon2"><i class="el-icon-d-arrow-right"></i></span>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
     </el-footer>
-  
   </div>
 </template>
 
