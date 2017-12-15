@@ -83,7 +83,7 @@
           <table class="table">
   <thead>
     <tr>
-      <th scope="col">Nom</th>
+      <th scope="col">Placement</th>
       <th scope="col">Montant</th>
       <th scope="col">Action</th>
     </tr>
@@ -122,7 +122,7 @@
     },
     data() {
       return {
-        dates: ["2017", "2030"],
+        dates: ["2017", "2027"],
         chosenIndex: "",
         simulation: [],
         errors: [],

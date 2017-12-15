@@ -28,7 +28,7 @@ export default {
     methods: {
         fillData() {
             this.chartData = {
-                labels: ['2017', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027'],
                 datasets: [{
                     label: 'Montant total cumulé',
                     borderColor: 'red',
@@ -43,7 +43,7 @@ export default {
             }
         },
         
-        addData() {
+        updateData() {
             chart.update();
         },
         removeData(chart) {

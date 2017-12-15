@@ -28,7 +28,7 @@
     },
     data() {
       return {
-        dates: ["2017", "2030"],
+        dates: ["2017", "2027"],
         chosenIndex: "",
         simulation: [],
         errors: [],
@@ -162,7 +162,7 @@
     text-align: center;
      margin-bottom:100px;
      color:#fff;
-     background-color:rgba(0, 0, 0, 0.3);
+     text-shadow: -2px -2px 6px #303030;
      padding:12px 0;
   }
   

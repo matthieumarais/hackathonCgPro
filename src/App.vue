@@ -9,10 +9,10 @@
 
     <el-footer class="grid-content steps">
       <router-link v-if='i<3' v-bind:to="page"><button class="btn1 btn" v-bind:class="{disable:isDisable }" @click="next">Démarrer votre simulation</button></router-link>
-      <router-link v-if='i==3' v-bind:to="page"><button class="btn2 btn" v-bind:class="{disable:isDisable }" @click="next">Suivant</button></router-link>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      <router-link v-if='i==3' v-bind:to="page"><button class="btn btn-primary btn2" v-bind:class="{disable:isDisable }" @click="next">Suivant</button></router-link>
+<!--       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   <i class="el-icon-service"></i>
-</button>
+</button> -->
       <el-steps style="margin-top: 50px" :active="active" finish-status="success">
       <el-step title="Bienvenue"></el-step>
       <el-step  title="Simulation"></el-step>
@@ -102,7 +102,8 @@
   .btn1{
     cursor: pointer;
     top: 39%;
-    left: 694px;
+    left: 50%;
+    transform: translateX(-50%);
     position: absolute;
     background-color:#00A5DA;
      color:#fff; font-size:20px;
@@ -112,5 +113,11 @@
     color:#fff;
     background-color: transparent;
     border:solid 1px #36abd7;
+  }
+
+  .btn2{
+position: absolute;
+right: 20px;
+bottom: 20px;
   }
 </style>
