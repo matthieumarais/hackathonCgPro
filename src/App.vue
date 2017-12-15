@@ -9,10 +9,9 @@
     <el-footer class="grid-content steps">
       <router-link v-bind:to="page"><el-button v-bind:class="{disable:isDisable }" style="margin-bottom: 20px;" @click="next">Next step</el-button></router-link>
       <el-steps :active="active" finish-status="success">
-        <el-step title="Step 1" description="Some description"></el-step>
-       <el-step  title="Step 2" description="Some description"></el-step>
-        <el-step title="Step 3" description="Some description"></el-step>
-        <el-step title="Step 4" description="Some description"></el-step>
+      <el-step title="Bienvenue" description="Some description"></el-step>
+      <el-step  title="Simulation" description="Some description"></el-step>
+      <el-step  title="Résultat" description="Some description"></el-step>
       </el-steps>
     </el-footer>
   
@@ -40,8 +39,8 @@
   
     methods: {
       next() {
-        if (this.active++ > 3) this.active = 4;
-        if (this.i > 3) this.isDisable = true;
+        if (this.active++ > 2) this.active = 3;
+        if (this.i > 2) this.isDisable = true;
         this.i++
         this.page = "/step" + this.i
         return this.page

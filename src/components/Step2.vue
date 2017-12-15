@@ -68,16 +68,19 @@
             </el-option>
           </el-select>
         </div>
-        <div style="margin-top: 15px;">
+        <div style="margin-top: 15px; width:50%">
           <el-input placeholder="Montant" v-model="amount">
             <template slot="append">€
 </template>
   </el-input>
-</div>
           <el-button v-on:click="addAsset()" type="info"><i class="el-icon-circle-plus-outline"></i></el-button>
+  
+</div>
         <div>
+         <div class="padding">
           {{dates[0] | formatDate}} - {{dates[1] | formatDate}}
-          <div v-for="(item, index) in assets">{{item.name}}: {{item.amount}}€<button v-on:click="deleteAsset(item.idAsset)"><i class="el-icon-error"></i></button></div>
+          </div>
+          <div class="padding" v-for="(item, index) in assets">{{item.name}}: {{item.amount}}€<button class="margin" v-on:click="deleteAsset(item.idAsset)"><i class="el-icon-error"></i></button></div>
         </div>
       </el-col>
     </el-row>
@@ -90,17 +93,18 @@ import axios from "axios";
 import LineExample from "./LineChart.js";
 import { mapGetters, mapMutations } from "vuex";
 
+
 export default {
   computed: {
     ...mapGetters(["datesGetter", "assetsGetter"])
   },
-  name: "Step2",
+  name: "step2",
   components: {
     LineExample
   },
   data() {
     return {
-      dates: [],
+      dates: ["2017","2030"],
       chosenIndex: "",
       simulation: [],
       errors: [],
@@ -108,7 +112,8 @@ export default {
       activeName: "2",
       models: [],
       assets: [],
-      amount: ""
+      amount: "",
+     // label:[]
     };
   },
 
@@ -134,18 +139,18 @@ export default {
             rate: 0.05
           }
         );
-        this.getAssets();
+        this.getSimu(); // lance la simu
+        this.getAssets();  // affiche la liste
         this.$store.commit("storeDates", this.dates);
+        
       } catch (e) {
         this.errors.push(e);
       }
-      /*  this.$store.commit("storeAssets", this.assets[this.chosenIndex]);
-        this.$store.commit("storeDates", this.dates); */
     },
     async getSimu() {
       try {
         const response = await axios.get(
-          `https://ulnjbgo4dl.execute-api.eu-central-1.amazonaws.com/dev/hackaton/user/1/simulation?start=` + store.dates[0] + `&end=`
+         `https://ulnjbgo4dl.execute-api.eu-central-1.amazonaws.com/dev/hackaton/user/1/simulation?start=${this.dates[0]}&end=${this.dates[1]}`
         );
         this.simulation = response.data;
         console.log("simulation", this.simulation);
@@ -183,7 +188,8 @@ export default {
             id
         );
         console.log("deleted");
-        this.getAssets();
+        this.getSimu(); // lance la simu
+        this.getAssets();  // affiche la liste
       } catch (e) {
         this.errors.push(e);
       }
@@ -207,11 +213,15 @@ export default {
     margin-bottom: 0;
   }
 }
-
+.padding{
+  padding-bottom:20px;
+}
 .custom-input {
   height: 100px;
 }
-
+.margin{
+  margin-left:20px;
+}
 .grid-content {
   min-height: 36px;
 }

@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Step1 from '@/components/Step1'
-import Step2 from '@/components/Step2'
-import Step3 from '@/components/Step3'
+import step1 from '@/components/step1'
+import step2 from '@/components/step2'
+import end from '@/components/end'
 
 
 Vue.use(Router)
@@ -10,18 +10,18 @@ Vue.use(Router)
 export default new Router({
     routes: [{
             path: '/',
-            name: 'Step1',
-            component: Step1
+            name: 'step1',
+            component: step1
         },
         {
             path: '/step2',
-            name: 'Step2',
-            component: Step2
+            name: 'step2',
+            component: step2
         },
         {
-            path: '/step3',
-            name: 'Step3',
-            component: Step3
-        }
+          path: '/step3',
+          name: 'end',
+          component: end
+      },
     ]
 })

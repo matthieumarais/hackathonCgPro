@@ -3,17 +3,16 @@
         <div class="top">
             <h1>Merci pour votre confiance</h1>
             <div class="row">
-                <div class="col-md-4">
-                    <button class="btn" aria-label="Left Align">Télecharger(.pdf)</button>
+                <div class="col-md-6">
+                    <button class="btn btn-secondary" aria-label="Left Align"><i class="el-icon-download"></i> Télecharger le PDF</button>
+                    <br> ou <br>
+                    <button class="btn btn-primary" aria-label="Left Align"><i class="el-icon-printer"></i>Imprimer</button>
                 </div>
-                <div class="col-md-4">
-                    <button class="btn" aria-label="Left Align">Envoyer</button>
-                </div>
-                <div class="col-md-4">
-                    <button class="btn" aria-label="Left Align">imprimer</button>
+                <div class="col-md-6">
+                    <button class="btn btn-primary" aria-label="Left Align"><i class="el-icon-message"></i>Envoyer par email</button>
                 </div>
             </div>
-           <a href="http://localhost:8080/"><button class="btn simu">Refaire une simulation</button></a>
+           <a href="http://localhost:8080/"><button class="btn btn-primary">Refaire une simulation</button></a>
         </div>
     </div>
 </template>
@@ -39,13 +38,18 @@
         position: relative;
         height:70vh;
     }
+
     .btn{
-        cursor: pointer;
-        width:160px;
-        padding:10px 0;
-        background-color: #00A5DA;
         font-size: 18px;
         color:#fff;
+         cursor: pointer;
+        width:200px;
+        padding:10px 0;
+    }
+    .btn-primary{
+    
+        background-color: #00A5DA;
+
     }
     .simu{
         margin-top: 200px;
